@@ -1,3 +1,9 @@
+Explicação dos Arquivos:
+  - lista.txt: contém 3 milhões de números, cada milhão separado por quebra de linha e os números separados por vírgulas.
+  - listaBackup.txt: backup de lista.txt
+  - prova.java: contém os algoritmos.
+  - lista.txt: contém 3 milhões de números, cada milhão separado por quebra de linha e os números separados por vírgulas.
+
 Informações da Máquina:
 
 Nome do Sistema Operacional	Microsoft Windows 10 Home 
