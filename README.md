@@ -13,3 +13,4 @@ Memória Física (RAM) Instalada	4,00 GB
 
 Notas:
 - Muitos dos algoritmos demoravam horas de execução e portanto não foi possível salvar o progresso destas.
+- Os algoritmos insert e bubble demoraram muito tempo nos arrays reversos e não ordenados, logo não foi documentado.
