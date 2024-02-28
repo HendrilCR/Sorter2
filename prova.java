@@ -13,8 +13,10 @@ class Main{
 		Sorter s1 = new Sorter();
 
 		//s1.bubble(array3);
-		s1.selection(array2);
-		//s1.insert(array3);
+		//s1.selection(array2);
+		s1.insert(array3);
+		//s1.ordenarMergeSort(array1);
+		//s1.heapSort(array3);
 		}
 }
 
@@ -71,6 +73,7 @@ class Arquivo{
 class Sorter{
 	int i,z,temp;
 	String tempo;
+	int comp;
 	int trocas = 0;
 	void bubble(int[] array){
 		long tempoInicial = System.nanoTime()/1000000;
@@ -89,12 +92,12 @@ class Sorter{
 
 					}
 				comp++;
-				tempo = "Comparações: "+comp+" - "+"Mili:"+(System.nanoTime()/1000000-tempoInicial)+" Sec:"+(System.nanoTime()/1000000000-tempoInicial/1000)+" Min:"+((System.nanoTime()/1000000000-tempoInicial/1000)/60);
-				tempo+=" Trocas: "+trocas+" Número na posição 1: "+array[0];
-				System.out.println(tempo);
+				
 				}
 			if(trocou==false){
-				System.out.println("Lista ordenada."+"\n"+Arrays.toString(array));
+				tempo = "Comparações: "+comp+" - "+"Mili:"+(System.nanoTime()/1000000-tempoInicial)+" Sec:"+(System.nanoTime()/1000000000-tempoInicial/1000)+" Min:"+((System.nanoTime()/1000000000-tempoInicial/1000)/60);
+				tempo+=" Trocas: "+trocas+" Número na posição 1: "+array[0];
+				System.out.println("Lista ordenada.");
 				System.out.println(tempo);
 				break;
 				}
@@ -118,12 +121,11 @@ class Sorter{
 			int temp = array[min_idx]; 
 			array[min_idx] = array[i]; 
 			array[i] = temp; 
-			
-			tempo = "Comparações: "+comp+" - "+"Mili:"+(System.nanoTime()/1000000-tempoInicial)+" Sec:"+(System.nanoTime()/1000000000-tempoInicial/1000)+" Min:"+((System.nanoTime()/1000000000-tempoInicial/1000)/60);
-			tempo+=" Trocas: "+trocas+" Primeiro: "+array[0]+" "+j+"-"+n;
-			System.out.println(tempo);
 			}
 		}
+		tempo = "Comparações: "+comp+" - "+"Mili:"+(System.nanoTime()/1000000-tempoInicial)+" Sec:"+(System.nanoTime()/1000000000-tempoInicial/1000)+" Min:"+((System.nanoTime()/1000000000-tempoInicial/1000)/60);
+		tempo+=" Trocas: "+trocas+" Primeiro: "+array[0]+" "+j+"-"+n;
+		System.out.println(tempo);
 		
 	} 
 
@@ -147,9 +149,116 @@ class Sorter{
             comp++;
             array[j + 1] = key;
 
-            tempo = "Comparações: "+comp+" - "+"Mili:"+(System.nanoTime()/1000000-tempoInicial)+" Sec:"+(System.nanoTime()/1000000000-tempoInicial/1000)+" Min:"+((System.nanoTime()/1000000000-tempoInicial/1000)/60);
-			tempo+=" Trocas: "+trocas+" Primeiro: "+array[0]+" "+j+"-"+n;
-			System.out.println(tempo);
+            
         }
+        tempo = "Comparações: "+comp+" - "+"Mili:"+(System.nanoTime()/1000000-tempoInicial)+" Sec:"+(System.nanoTime()/1000000000-tempoInicial/1000)+" Min:"+((System.nanoTime()/1000000000-tempoInicial/1000)/60);
+		tempo+=" Trocas: "+trocas+" Primeiro: "+array[0]+" "+j+"-"+n;
+		System.out.println(tempo);
 	}
+
+
+	void ordenarMergeSort(int[] numeros) {
+		long tempoInicial = System.nanoTime()/1000000; 
+	    if (numeros.length > 1) {
+	    comp++;
+	      int inicio = 0;
+	      int fim = numeros.length - 1;
+	      ordenarMergeSort(numeros, inicio, fim);
+
+	    }
+	    tempo = "Comparações: "+comp+" - "+"Mili:"+(System.nanoTime()/1000000-tempoInicial)+" Sec:"+(System.nanoTime()/1000000000-tempoInicial/1000)+" Min:"+((System.nanoTime()/1000000000-tempoInicial/1000)/60);
+		tempo+=" Trocas: "+trocas+" Primeiro: "+numeros[0];
+		System.out.println(tempo);
+	  }
+
+	void ordenarMergeSort(int[] numeros, int inicio, int fim) {
+	    if (inicio < fim) {
+	    	comp++;
+	      int meio = (inicio + fim) / 2;
+	      ordenarMergeSort(numeros, inicio, meio);
+	      ordenarMergeSort(numeros, meio + 1, fim);
+	      mesclar(numeros, inicio, meio, fim);
+	    }
+	  }
+
+	void mesclar(int[] numeros, int inicio, int meio, int fim) {
+	    int tamanhoEsquerda = meio - inicio + 1;
+	    int tamanhoDireita = fim - meio;
+	    int[] esquerda = new int[tamanhoEsquerda];
+	    int[] direita = new int[tamanhoDireita];
+	    trocas++;
+	    System.arraycopy(numeros, inicio, esquerda, 0, tamanhoEsquerda);
+	    System.arraycopy(numeros, meio + 1, direita, 0, tamanhoDireita);
+
+	    int indiceEsquerda = 0, indiceDireita = 0, indiceAtual = inicio;
+	    while (indiceEsquerda < tamanhoEsquerda && indiceDireita < tamanhoDireita) {
+	    	comp++;
+	      if (esquerda[indiceEsquerda] <= direita[indiceDireita]) {
+	      	comp++;
+	        numeros[indiceAtual] = esquerda[indiceEsquerda];
+	        indiceEsquerda++;
+	      } else {
+	        numeros[indiceAtual] = direita[indiceDireita];
+	        indiceDireita++;
+	      }
+	      indiceAtual++;
+	    }
+
+	    while (indiceEsquerda < tamanhoEsquerda) {
+	    	comp++;
+	      numeros[indiceAtual] = esquerda[indiceEsquerda];
+	      indiceEsquerda++;
+	      indiceAtual++;
+	    }
+	    while (indiceDireita < tamanhoDireita) {
+	    	comp++;
+	      numeros[indiceAtual] = direita[indiceDireita];
+	      indiceDireita++;
+	      indiceAtual++;
+	    }
+	  }
+
+	void heapSort(int[] arr) {
+	long tempoInicial = System.nanoTime()/1000000; 
+    if (arr == null || arr.length == 0) {
+
+        return;
+    }
+
+    for (int i = arr.length / 2 - 1; i >= 0; i--) {
+        heapify(arr, i, arr.length);
+    }
+
+    for (int i = arr.length - 1; i > 0; i--) {
+    	trocas++;
+        int temp = arr[0];
+        arr[0] = arr[i];
+        arr[i] = temp;
+        heapify(arr, 0, i);
+    	}
+    comp++;
+    tempo = "Comparações: "+comp+" - "+"Mili:"+(System.nanoTime()/1000000-tempoInicial)+" Sec:"+(System.nanoTime()/1000000000-tempoInicial/1000)+" Min:"+((System.nanoTime()/1000000000-tempoInicial/1000)/60);
+	tempo+=" Trocas: "+trocas;
+	System.out.println(tempo);
+	}
+
+	void heapify(int[] arr, int i, int n) {
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+
+    if (left < n && arr[left] > arr[largest])
+        largest = left;
+
+    if (right < n && arr[right] > arr[largest])
+        largest = right;
+
+    if (largest != i) {
+        int swap = arr[i];
+        arr[i] = arr[largest];
+        arr[largest] = swap;
+        heapify(arr, largest, n);
+    }
+}
+
 }
