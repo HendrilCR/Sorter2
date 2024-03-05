@@ -1,4 +1,4 @@
-![alt text](tabela.png)
+![Tabela de Códigos](tabela.png)
 
 Explicação dos Arquivos:
   - lista.txt: contém 3 milhões de números, cada milhão separado por quebra de linha e os números separados por vírgulas.
